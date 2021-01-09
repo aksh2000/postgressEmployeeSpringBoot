@@ -5,19 +5,21 @@ import com.example.demopostgres.repository.EmployeeRepository;
 import com.example.demopostgres.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
 
 
 @Service
+@Transactional
 public class EmployeeServiceImplementation implements EmployeeService {
 
 
     @Autowired
     EmployeeRepository employeeRepository;
 
-    @Override
+    @Transactional(readOnly = false)
     public Employee save(Employee employee) {
         return employeeRepository.save(employee);
     }
